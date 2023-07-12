@@ -34,19 +34,16 @@ class BreezyAPI():
         check_apis = self.__parseAttack();
         if check_apis == False:
             print("[ X ] Error, This method was not found in any of the API in the json file....!");
-            return False; # Handle it your own way
+            return False;
 
         for api in check_apis:
-            resp = requests.get(api); ## If you want later, you can then handle this
+            resp = requests.get(api);
             if resp.status_code != 200:
                 print("[ X ] Error, This API is either offline or unable to reach....!");
                 continue;
 
         return True;
 
-    """
-        return: str | bool ('url' | False)
-    """
     def __parseAttack(self) -> list[str] | bool:
         matched_apis = []
 

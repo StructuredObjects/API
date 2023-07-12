@@ -7,13 +7,13 @@ class QBOT_M():
     username:       str;
     password:       str;
     methods:        str;
-    method_usage:   str;
+    method_usage:   dict;
     max_time:       int;
 
 class BreezyQBOT():
     qbots:      list[QBOT_M];
-    def __init__(self, qbot_m: dict):
+    def __init__(self, qbot_m: dict = {}):
         self.__parseMethods();
 
-    def __parseMethods(self) -> bool:
+    def __parseMethods(self, m: dict) -> bool:
         pass
