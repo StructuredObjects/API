@@ -9,3 +9,5 @@ class Breezy():
 
     def __init__(self, ssh_m: dict = {}, api_m: dict = {}, qbot_m: dict = {}):
         self.ssh = BreezySSH(ssh_m);
+        self.api = BreezyAPI(api_m);
+        self.qbot = BreezyQBOT(qbot_m);
