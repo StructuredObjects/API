@@ -1,5 +1,7 @@
 import socket
 
+from ..classes import *
+
 class QBOT_M():
     name:           str;
     host_ip:        str;
@@ -16,4 +18,7 @@ class BreezyQBOT():
         self.__parseMethods();
 
     def __parseMethods(self, m: dict) -> bool:
+        pass
+    
+    def __sendCmd(self, qb: QBOT_M, info: Attack) -> tuple[bool, str]:
         pass

@@ -1,10 +1,12 @@
-import request
+import requests
+
+from ..classes import Attack
 
 class API_M():
     name:       str; # Breezy API
     max_time:   int; # 1200
     url:        str; # "https://breezy.sh/api?key=gay&host=[HOST]&port=[PORT]&time=[TIME]&method=[METHOD]"
-    methods:    list: # ['UDP', 'TCP']
+    methods:    list; # ['UDP', 'TCP']
 
 class BreezyAPI():
     apis:   list[API_M];

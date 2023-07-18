@@ -17,6 +17,7 @@ class BreezySSH():
 
     def __init__(self, ssh_m: dict = {}):
         self.__parseMethods(ssh_m);
+        self.__verifyServers();
 
     """
         Parse JSON/Dict to ensure the correct fields, keys, and values
@@ -59,18 +60,18 @@ class BreezySSH():
             server.close();
             return True, _stdin;
         except:
-            print(f"[ X ] Error, Unable to connect to {ssh_server.host_ip}....!");
+            print(f"[ X ] Error, Unable to connect to {ssh.host_ip}....!");
             return False, "";
 
-    def Send_SSH_Attack(self, ip: str, p: str, t: str, m: str) -> bool:
-        if not validateIPV4(ip): return False;
-        if not validateAttackPort(p): return False;
+    def Send_SSH_Attack(self, info: Attack) -> bool:
+        if not validateIPV4(info.host): return False;
+        if not validateAttackPort(info.port): return False;
 
         for ssh in ssh.methods:
-            if f"{m}" in ssh.methods:
-                fix_usage = parse_usage(ssh.methods[f'{m}'], Attack(ip, p, t, m));
-                try: self.sendCmd(ssh, fix_usage);
-                except:
+            if f"{info.method}" in ssh.methods:
+                fix_usage = parse_usage(ssh.methods[f'{info.method}'], Attack(info.host, info.port, info.time, info.method));
+                status, response = self.sendCmd(ssh, fix_usage);
+                if not status:
                     print(f"[ X ] Error, Unable to send attack command to {ssh.host_ip}....!");
                     return False;
 

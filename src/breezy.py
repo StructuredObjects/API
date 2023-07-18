@@ -1,13 +1,15 @@
 from protocols.api      import *
 from protocols.ssh      import *
-from protocols.botnet   import *
+from protocols.botnets  import *
 
 class Breezy():
     ssh: BreezySSH;
     api: BreezyAPI;
     qbot: BreezyQBOT;
 
-    def __init__(self, ssh_m: dict = {}, api_m: dict = {}, qbot_m: dict = {}):
-        self.ssh = BreezySSH(ssh_m);
-        self.api = BreezyAPI(api_m);
-        self.qbot = BreezyQBOT(qbot_m);
+    def __init__(self, servers: dict = {}, apis: dict = {}, nets: dict = {}):
+        self.ssh = BreezySSH(servers);
+        self.api = BreezyAPI(apis);
+        self.qbot = BreezyQBOT(nets);
+
+    
