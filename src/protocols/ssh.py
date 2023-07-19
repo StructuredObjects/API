@@ -1,4 +1,4 @@
-import json, paramiko
+import paramiko
 
 from ..utils import *
 from ..classes import Attack
